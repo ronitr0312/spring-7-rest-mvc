@@ -1,6 +1,7 @@
 package guru.springframwork.spring7restmvc.services;
 
 import ch.qos.logback.core.util.StringUtil;
+import guru.springframwork.spring7restmvc.controller.NotFoundException;
 import guru.springframwork.spring7restmvc.model.Beer;
 import guru.springframwork.spring7restmvc.model.BeerStyle;
 import lombok.extern.slf4j.Slf4j;
@@ -68,15 +69,15 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
-    public Beer getBeerById(UUID id){
+    public Optional<Beer> getBeerById(UUID id){
 
         log.debug("Get Beer by Id - in service Id:"+id.toString());
 
-        return beerMap.get(id);
+        return Optional.of(beerMap.get(id));
     }
 
     @Override
-    public Beer saveNewBeer(Beer beer){
+    public Optional<Beer> saveNewBeer(Beer beer){
 
         Beer savedBeer  = Beer.builder()
                 .id(UUID.randomUUID())
@@ -91,7 +92,7 @@ public class BeerServiceImpl implements BeerService{
 
         beerMap.put(savedBeer.getId(),savedBeer);
 
-        return savedBeer;
+        return Optional.of(savedBeer);
     }
 
     @Override

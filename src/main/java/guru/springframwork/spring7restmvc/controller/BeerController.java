@@ -2,7 +2,6 @@ package guru.springframwork.spring7restmvc.controller;
 
 import guru.springframwork.spring7restmvc.model.Beer;
 import guru.springframwork.spring7restmvc.services.BeerService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -46,7 +45,7 @@ public class BeerController {
 
     @PostMapping(BEER_PATH)
     public ResponseEntity handlePost(@RequestBody Beer beer){
-        Beer savedBeer = beerService.saveNewBeer(beer);
+        Beer savedBeer = beerService.saveNewBeer(beer).orElseThrow(NotFoundException::new);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location","/api/v1/beer/" +
@@ -66,6 +65,7 @@ public class BeerController {
 
         log.debug("Get Beer By id - in Controller-12344qq   ");
 
-        return beerService.getBeerById(beerId);
+        return beerService.getBeerById(beerId).orElseThrow(NotFoundException::new);
     }
+
 }
