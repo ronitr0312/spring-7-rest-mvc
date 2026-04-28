@@ -1,4 +1,4 @@
-package guru.springframwork.Spring7RestMvcApplication;
+package guru.springframwork.spring7restmvc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
